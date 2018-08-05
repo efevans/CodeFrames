@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using CodeFrames;
 
-namespace CodeFramesPlayer
+namespace CodeFrames
 {
     public class TestFrameValueGenerator : IFrameValueGetter
     {
