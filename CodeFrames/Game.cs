@@ -16,12 +16,12 @@ namespace CodeFrames
 
         private Team CurrentTeam { get; set; }
 
-        private Frame[] Frames { get; }
         private int RemainingBlueCards { get; set; }
         private int RemainingRedCards { get; set; }
 
-        private bool IsOver { get; set; }
-        private Team Winner { get; set; }
+        public Frame[] Frames { get; private set; }
+        public bool IsOver { get; private set; }
+        public Team Winner { get; private set; }
 
         public Game(IFrameValueGetter fvGetter)
         {
@@ -168,7 +168,7 @@ namespace CodeFrames
                 || (cColor == CardColor.Red && team == Team.Red);
         }
 
-        private class Frame
+        public class Frame
         {
             public CardColor Color { get; }
             public bool IsFlipped { get; set; }
