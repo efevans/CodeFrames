@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace CodeFrames
 {
@@ -170,6 +172,7 @@ namespace CodeFrames
 
         public class Frame
         {
+            [JsonConverter(typeof(StringEnumConverter))]
             public CardColor Color { get; }
             public bool IsFlipped { get; set; }
             public string Value { get; }
