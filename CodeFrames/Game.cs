@@ -16,29 +16,21 @@ namespace CodeFrames
         private const int DeathCards = 1;
         private const int ExtraCardsForStartingTeam = 1;
 
-        private Team CurrentTeam { get; set; }
+        public Team CurrentTeam { get; private set; }
 
-        private int RemainingBlueCards { get; set; }
-        private int RemainingRedCards { get; set; }
+        public int RemainingBlueCards { get; private set; }
+        public int RemainingRedCards { get; private set; }
 
         public Frame[] Frames { get; private set; }
         public bool IsOver { get; private set; }
         public Team Winner { get; private set; }
 
+        private IFrameValueGetter FrameValueGetter { get; }
+
         public Game(IFrameValueGetter fvGetter)
         {
-            CurrentTeam = GetRandomTeam();
-            RemainingBlueCards = RemainingRedCards = CardsPerTeam;
-            if (CurrentTeam == Team.Blue)
-            {
-                RemainingBlueCards++;
-            }
-            else
-            {
-                RemainingRedCards++;
-            }
-
-            Frames = CreateFrames(fvGetter);
+            FrameValueGetter = fvGetter;
+            StartNewGame();
         }
 
         public void Guess(int frameInd)
@@ -78,6 +70,12 @@ namespace CodeFrames
             }
         }
 
+        public void Reset()
+        {
+            FrameValueGetter.Reset();
+            StartNewGame();
+        }
+
         public string GetReadableGameState()
         {
             StringBuilder sb = new StringBuilder();
@@ -101,6 +99,22 @@ namespace CodeFrames
             }
 
             return sb.ToString();
+        }
+
+        private void StartNewGame()
+        {
+            CurrentTeam = GetRandomTeam();
+            RemainingBlueCards = RemainingRedCards = CardsPerTeam;
+            if (CurrentTeam == Team.Blue)
+            {
+                RemainingBlueCards++;
+            }
+            else
+            {
+                RemainingRedCards++;
+            }
+
+            Frames = CreateFrames(FrameValueGetter);
         }
 
         private bool CheckEndConditions(bool deathCardFlipped)
@@ -193,6 +207,7 @@ namespace CodeFrames
         Black = 3
     }
 
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Team
     {
         Blue = 0,

@@ -50,5 +50,10 @@ namespace CodeFrames
             }
             return "";
         }
+
+        public void Reset()
+        {
+            
+        }
     }
 }

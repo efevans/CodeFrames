@@ -3,5 +3,6 @@
     public interface IFrameValueGetter
     {
         string GetNext();
+        void Reset();
     }
 }
