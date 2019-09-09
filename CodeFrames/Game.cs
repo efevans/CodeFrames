@@ -103,6 +103,7 @@ namespace CodeFrames
 
         private void StartNewGame()
         {
+            IsOver = false;
             CurrentTeam = GetRandomTeam();
             RemainingBlueCards = RemainingRedCards = CardsPerTeam;
             if (CurrentTeam == Team.Blue)
@@ -132,7 +133,7 @@ namespace CodeFrames
                 Winner = Team.Blue;
                 return true;
             }
-            
+
             if (RemainingRedCards == 0)
             {
                 IsOver = true;
