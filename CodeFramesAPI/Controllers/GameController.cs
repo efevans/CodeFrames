@@ -26,7 +26,6 @@ namespace CodeFramesAPI.Controllers
         {
             var gameState = (Game)_cache.Get("CodeFrames");
             return gameState;
-            //return new JsonResult(gameState);
         }
 
         [HttpPost]
