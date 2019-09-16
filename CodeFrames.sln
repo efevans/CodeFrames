@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFrames", "CodeFrames\CodeFrames.csproj", "{10840267-996E-4C7B-8482-773BBA443AB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeFrames", "CodeFrames\CodeFrames.csproj", "{10840267-996E-4C7B-8482-773BBA443AB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFramesPlayer", "CodeFramesPlayer\CodeFramesPlayer.csproj", "{88CDFB7E-03EC-4C80-B926-9E196DD1FFF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeFramesPlayer", "CodeFramesPlayer\CodeFramesPlayer.csproj", "{88CDFB7E-03EC-4C80-B926-9E196DD1FFF8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10840267-996E-4C7B-8482-773BBA443AB8} = {10840267-996E-4C7B-8482-773BBA443AB8}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeFramesAPI", "CodeFramesAPI\CodeFramesAPI.csproj", "{32A3078A-0CEC-42CD-A63E-B0E091A4F87A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{10840267-996E-4C7B-8482-773BBA443AB8} = {10840267-996E-4C7B-8482-773BBA443AB8}
 	EndProjectSection
@@ -24,6 +29,10 @@ Global
 		{88CDFB7E-03EC-4C80-B926-9E196DD1FFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88CDFB7E-03EC-4C80-B926-9E196DD1FFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88CDFB7E-03EC-4C80-B926-9E196DD1FFF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A3078A-0CEC-42CD-A63E-B0E091A4F87A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A3078A-0CEC-42CD-A63E-B0E091A4F87A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A3078A-0CEC-42CD-A63E-B0E091A4F87A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A3078A-0CEC-42CD-A63E-B0E091A4F87A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,7 +42,7 @@ namespace CodeFrames
 
         public string GetNext()
         {
-            if(Values.Any())
+            if (Values.Any())
             {
                 string value = Values.ElementAt(0);
                 Values.RemoveAt(0);
@@ -53,7 +53,7 @@ namespace CodeFrames
 
         public void Reset()
         {
-            
+
         }
     }
 }
