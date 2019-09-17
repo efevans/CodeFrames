@@ -33,6 +33,14 @@ namespace CodeFrames
             StartNewGame();
         }
 
+        public void Pass()
+        {
+            if (!IsOver)
+            {
+                CurrentTeam = GetOtherTeam(CurrentTeam);
+            }
+        }
+
         public void Guess(int frameInd)
         {
             if (!IsOver && frameInd >= 0 && frameInd < CardCount)

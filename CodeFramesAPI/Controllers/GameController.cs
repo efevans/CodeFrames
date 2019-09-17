@@ -38,6 +38,15 @@ namespace CodeFramesAPI.Controllers
         }
 
         [HttpPost]
+        [Route("pass")]
+        public ActionResult<Game> PostPass()
+        {
+            var gameState = (Game)_cache.Get("CodeFrames");
+            gameState.Pass();
+            return gameState;
+        }
+
+        [HttpPost]
         [Route("reset")]
         public ActionResult<Game> PostNewGame()
         {

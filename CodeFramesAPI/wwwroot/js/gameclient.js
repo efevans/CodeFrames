@@ -16,6 +16,9 @@ $(document).ready(function () {
     $('#NewGameButton').click(function () {
         reset();
     });
+    $('#PassTurnButton').click(function () {
+        passTurn();
+    });
 });
 
 //function connectToServer() {
@@ -34,6 +37,14 @@ function reset() {
     $.ajax({
         type: "POST",
         url: uri + '/reset',
+        success: updateGame
+    });
+}
+
+function passTurn() {
+    $.ajax({
+        type: "POST",
+        url: uri + '/pass',
         success: updateGame
     });
 }
