@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeFrames;
+using CodeFramesAPI.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,10 +29,9 @@ namespace CodeFramesAPI
         {
             services.AddMemoryCache();
 
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(
-                    options => options.SerializerSettings.ContractResolver = new DefaultContractResolver()
+            services.AddSignalR()
+                .AddJsonProtocol(
+                    options => options.PayloadSerializerSettings.ContractResolver = new DefaultContractResolver()
                 );
         }
 
@@ -56,18 +56,9 @@ namespace CodeFramesAPI
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            app.UseMvc(routes =>
+            app.UseSignalR(routes =>
             {
-                routes.MapRoute(
-                    name: "ControllerOnly",
-                    template: "api/{controller}");
-
-                routes.MapRoute(
-                    name: "ControllerAndActionAndId",
-                    template: "api/{controller}/{action}/{id?}",
-                    defaults: new { },
-                    constraints: new { id = @"^\d+$" });
+                routes.MapHub<GameHub>("/gamehub");
             });
         }
     }

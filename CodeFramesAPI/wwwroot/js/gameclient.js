@@ -1,15 +1,9 @@
 ﻿"use strict";
 var uri = 'api/game';
-var connection = null;
-var clientID = 0;
+var connection;
 
 $(document).ready(function () {
-    getGameState();
-    //connectToServer();
-    // This was previously used to continuously get the state from the server incase it changed
-    setInterval(function () {
-        getGameState();
-    }, 1000);
+    connect();
     $('[type="checkbox"]').click(function () {
         updateFrames();
     });
@@ -21,51 +15,44 @@ $(document).ready(function () {
     });
 });
 
-//function connectToServer() {
-//    const socket = new WebSocket("ws://" + document.location.hostname + ":6502");
+function connect() {
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl("/gamehub")
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
 
-//    socket.addEventListener('open', function (event) {
-//        socket.send('Hello Server!');
-//    });
+    connection.on("ReceiveGameUpdate", (game) => {
+        console.log(game);
+        updateGame(game);
+    });
 
-//    socket.addEventListener('message', function (event) {
-//        console.log("Message from server ", event.data);
-//    });
-//}
-
-function reset() {
-    $.ajax({
-        type: "POST",
-        url: uri + '/reset',
-        success: updateGame
+    connection.start().then(function () {
+        console.log("connected");
+        getGameState();
     });
 }
 
-function passTurn() {
-    $.ajax({
-        type: "POST",
-        url: uri + '/pass',
-        success: updateGame
-    });
+function getGameState() {
+    connection.invoke("SendNeedGameState").catch(err => console.error(err.toString()));
 }
 
 function guess(id) {
     var isSpymaster = document.getElementById("selectSpymaster").checked;
 
     if (!isSpymaster) {
-        $.ajax({
-            type: "POST",
-            url: uri + '/guess/' + id,
-            success: updateGame
-        });
+        connection.invoke("SendGuess", id).catch(err => console.error(err.toString()));
+        event.preventDefault();
     }
 }
 
-function getGameState() {
-    $.getJSON(uri)
-        .done(function (data) {
-            updateGame(data);
-        });
+function passTurn() {
+    connection.invoke("SendPass").catch(err => console.error(err.toString()));
+    event.preventDefault();
+}
+
+function reset() {
+    connection.invoke("SendNewGame").catch(err => console.error(err.toString()));
+    event.preventDefault();
 }
 
 function updateGame(game) {
