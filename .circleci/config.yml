@@ -1,8 +1,19 @@
 version: 1
 jobs:
     build:
+        environment:
+            IMAGE_NAME: efevans/codeframes
+            TAG: 1.0.0
         docker:
             - image: circleci/ruby:2.4.1
         steps:
             - checkout
-            - run: echo "A first hello"
+            - setup_remote_docker:
+                docker_layer_caching: true
+            - run:
+                name: Build and push Docker image
+                command: |
+                    docker build -t efevans/$IMAGE_NAME:$TAG .
+                    echo $_docker_hub_password_ | docker login -u $_docker_hub_username_ --password-stdin
+                    docker push efevans/$IMAGE_NAME:$TAG
+            
