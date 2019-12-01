@@ -2,7 +2,7 @@ version: 1
 jobs:
     build:
         environment:
-            IMAGE_NAME: efevans/codeframes
+            IMAGE_NAME: codeframes
             TAG: 1.0.0
         docker:
             - image: circleci/ruby:2.4.1
