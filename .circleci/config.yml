@@ -1,5 +1,5 @@
 version: 1
 jobs:
     build:
-    steps:
-    - run: echo "A first hello"
+        steps:
+            - run: echo "A first hello"
