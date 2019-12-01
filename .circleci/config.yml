@@ -3,5 +3,3 @@ jobs:
     build:
         docker:
             - image: hello-world
-        #steps:
-            #- run: echo "A first hello"
