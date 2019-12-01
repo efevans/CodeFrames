@@ -1,13 +1,8 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build-env
+
+# copy files
 WORKDIR /app
-
-# get libman
 COPY . ./
-RUN dotnet tool install -g Microsoft.Web.LibraryManager.Cli
-
-# Restore libman packages
-WORKDIR /app/CodeFramesAPI
-RUN /root/.dotnet/tools/libman restore
 
 # publish app
 WORKDIR /app
