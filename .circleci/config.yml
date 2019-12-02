@@ -5,7 +5,7 @@ jobs:
             IMAGE_NAME: codeframes
             TAG: 1.0.0
         docker:
-            - image: circleci/ruby:2.4.1
+            - image: circleci/ruby:latest
         steps:
             - checkout
             - setup_remote_docker
@@ -14,5 +14,5 @@ jobs:
                 command: |
                     docker build -t efevans/$IMAGE_NAME:$TAG .
                     echo "$_docker_hub_password_" | docker login -u "$_docker_hub_username_" --password-stdin
-                    docker push efevans/$IMAGE_NAME:$TAG
+                    docker push $IMAGE_NAME:$TAG
             
