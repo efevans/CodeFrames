@@ -6,7 +6,7 @@ jobs:
             IMAGE_NAME: codeframes
             TAG: 1.0.0
         docker:
-            - image: mcr.microsoft.com/dotnet/core/aspnet:2.1
+            - image: mcr.microsoft.com/dotnet/core/sdk:2.1
         steps:
             - checkout
             - setup_remote_docker
