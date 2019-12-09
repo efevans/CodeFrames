@@ -6,15 +6,10 @@ jobs:
             IMAGE_NAME: codeframes
             TAG: 1.0.0
         docker:
-            - image: mcr.microsoft.com/dotnet/core/sdk:2.1
+            - image: docker:stable-git
         steps:
             - checkout
             - setup_remote_docker
-            - run:
-                name: "Run Tests"
-                command: |
-                    dotnet restore
-                    dotnet test
             - run:
                 name: Build and push Docker image
                 command: |
