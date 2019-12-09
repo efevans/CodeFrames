@@ -31,11 +31,4 @@ jobs:
                     docker build -t efevans/$IMAGE_NAME:$TAG .
                     echo "$_docker_hub_password_" | docker login -u "$_docker_hub_username_" --password-stdin
                     docker push efevans/$IMAGE_NAME:$TAG
-workflows:
-    test_and_build:
-        jobs:
-            - test
-            - build:
-                requires:
-                    - test
             
