@@ -23,6 +23,16 @@ namespace CodeFrames.Tests
             game.CurrentTeam.Should().Be(teamBeforeGuess);
         }
 
+        [Fact]
+        public void Game_Starts_With_25_Cards()
+        {
+            var frameGetter = new Mock<IFrameValueGetter>();
+            frameGetter.Setup(x => x.GetNext()).Returns("value");
+            Game game = new Game(frameGetter.Object);
+
+            game.Frames.Count().Should().Be(25);
+        }
+
         private bool IsCardForTeam(Team team, CardColor cardColor)
         {
             if (team == Team.Blue && cardColor == CardColor.Blue
