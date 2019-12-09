@@ -4,7 +4,7 @@ jobs:
     test:
         description: "Run tests"
         docker:
-            - image: mcr.microsoft.com/dotnet/core/aspnet:2.1
+            - image: mcr.microsoft.com/dotnet/core/sdk:2.1
         steps:
             - checkout
             - run:
