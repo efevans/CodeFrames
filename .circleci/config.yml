@@ -1,5 +1,21 @@
-version: 1
+version: 2.1
+
+orbs:
+    windows: circleci/windows@2.2.0
+
 jobs:
+    test:
+        description: Setup and run application tests
+        executor: 
+            name: windows/default
+        steps:
+            - checkout
+            - run:
+                name: "Install project dependencies"
+                command: dotnet.exe restore
+            - run:
+                name: "Run Application Tests"
+                command: dotnet.exe test
     build:
         environment:
             IMAGE_NAME: codeframes
@@ -15,4 +31,11 @@ jobs:
                     docker build -t efevans/$IMAGE_NAME:$TAG .
                     echo "$_docker_hub_password_" | docker login -u "$_docker_hub_username_" --password-stdin
                     docker push efevans/$IMAGE_NAME:$TAG
+workflows:
+    test_and_build:
+        jobs:
+            - test
+            - build:
+                requires:
+                    - test
             
