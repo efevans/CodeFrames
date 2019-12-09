@@ -11,9 +11,11 @@ jobs:
             - checkout
             - setup_remote_docker
             - run:
-                name: Build and push Docker image
+                name: Build Image
+                command: docker build -t efevans/$IMAGE_NAME:$TAG .
+            - run:
+                name: Push Image
                 command: |
-                    docker build -t efevans/$IMAGE_NAME:$TAG .
                     echo "$_docker_hub_password_" | docker login -u "$_docker_hub_username_" --password-stdin
                     docker push efevans/$IMAGE_NAME:$TAG
             
