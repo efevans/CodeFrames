@@ -48,7 +48,8 @@ namespace CodeFramesAPI
             }
 
             var cache = app.ApplicationServices.GetService<IMemoryCache>();
-            Game game = new Game(new DanbooruImageGetter());
+            //Game game = new Game(new DanbooruImageGetter());
+            Game game = new Game(new DefaultImagesImageGetter());
             cache.Set("CodeFrames", game, new MemoryCacheEntryOptions()
             {
                 Priority = CacheItemPriority.NeverRemove
